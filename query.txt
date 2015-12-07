@@ -1,0 +1,23 @@
+*selecting all players with 30+ TDs */
+select playerID,playerName from players where TDs >29; 
+
+/*selecting all the players info on team24*/
+select * from players where playerID in (select playerID from playerSet where teamID = 23);
+
+/*selecting all the teams that has player 77*/
+select leagueID AS league,teamName from team where teamID in (select teamID from playerSet where playerID = 77 and teamID<=100);
+
+/* Selecting all the user that are in league 1*/
+select userID,userName,email from userTable where userID in (select userID from team where leagueID = 1);
+
+/*selecting all the player stats for every player on a team owned by user 915*/
+select * from players where playerID in (select playerID from playerSet where teamID in (select teamID from team where userID = 915)); 
+
+/* selecting all the teams that have a player who scored 30 TDs*/
+select teamName,teamID,leagueID from team where teamID in (select teamID from playerSet where playerId in (select playerId from players where TDs > 29)) and teamId<101;
+
+/*checking if user 27 has a team */
+select * from league where exists (select * from team where userID = 27 );
+
+/* counting how many teams each player is on not including free agents */
+select playerID,count(*) from playerSet where teamID <101 group by playerID;

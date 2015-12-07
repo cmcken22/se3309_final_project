@@ -1,0 +1,67 @@
+html {
+    background: url("images/football2.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+body {
+    margin: 0;
+    background-color:transparent;
+    width:100%;
+    /*text-align:center;*/
+    padding-top: 100px;
+}
+
+#registerbtn{
+    padding:10px;
+}
+
+#content{
+    width:1000px;
+    text-align:center;
+    margin:0px auto;
+    border:3px solid white;
+}
+
+#login_success_content{
+    width:1000px;
+    margin:0px auto;
+    border:3px solid white;
+    padding: 5px;
+}
+
+#mainTitle {
+    font-family: 'Cookie', cursive;
+    font-size: 58pt;
+    color: white;
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+}
+
+.whiteText{
+    color: white;
+}
+
+table {
+    background: url(images/grey.png);
+}
+
+#playerSetTable {
+    border-collapse: collapse;
+    border: 2px solid black;
+    color: black; 
+    background: url(images/grey.png);
+    /*background-color: red;*/
+}
+
+#playerSetTable tr td, th {
+    border-collapse: collapse;
+    border: 2px solid black;
+    color: black; 
+    padding: 10px;
+    background: url(images/grey.png);
+    /*background-color: red;*/
+}
