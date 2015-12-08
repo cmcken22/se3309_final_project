@@ -23,11 +23,14 @@ if($count > 0) {
     echo "<script>alert('Username already exists');</script>";
     echo "<script>setTimeout(\"location.href = 'registerForm.php';\",100);</script>";
 }
-
-if($newPassword == $newPassword2){
-    $sql = "INSERT INTO userTable (userName, userPassword, email) VALUES ('$newUsername', '$newPassword', '$newEmail')";
-    echo $sql;
-    mysqli_query($db, $sql);
+if($count == 0){
+    if($newPassword == $newPassword2){
+        $sql = "INSERT INTO userTable (userName, userPassword, email) VALUES ('$newUsername', '$newPassword', '$newEmail')";
+        echo $sql;
+        mysqli_query($db, $sql);
+        echo "<script>setTimeout(\"location.href = 'loginForm.php';\",100);</script>";
+    }
+    
 }
 else{
     echo "Redirecting...";

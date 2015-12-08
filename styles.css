@@ -65,3 +65,37 @@ table {
     background: url(images/grey.png);
     /*background-color: red;*/
 }
+
+#freeAgentTable {
+    border-collapse: collapse;
+    border: 2px solid black;
+    color: black; 
+    background: url(images/grey.png);
+    /*background-color: red;*/
+}
+
+#freeAgentTable tr td, th {
+    border-collapse: collapse;
+    border: 2px solid black;
+    color: black; 
+    padding: 10px;
+    background: url(images/grey.png);
+    /*background-color: red;*/
+}
+
+#statsTable {
+    border-collapse: collapse;
+    border: 2px solid black;
+    color: black; 
+    background: url(images/grey.png);
+    /*background-color: red;*/
+}
+
+#statsTable tr td, th {
+    border-collapse: collapse;
+    border: 2px solid black;
+    color: black; 
+    padding: 10px;
+    background: url(images/grey.png);
+    /*background-color: red;*/
+}

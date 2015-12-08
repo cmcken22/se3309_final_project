@@ -9,6 +9,8 @@ $count = mysqli_num_rows($result);
 $teams = array();
 $teamNames = array();
 $teamLeague = array();
+$totalPoints = 0;
+
 
 echo '<table id="playerSetTable"><tr>
 <th>Team Name</th>
@@ -24,12 +26,12 @@ while ($tableRow = mysqli_fetch_assoc($result)) { // Loops 3 times if there are 
     <td>".$tableRow['teamID']."</td>
     </tr>";
 }
-echo '</table>';
-echo "<h1 class='whiteText'>count = $count</h1>";
-echo "<h1 class='whiteText'>TEAMS</h1>";
-$queries = array();
+echo '</table><br>';
+
+$queries = array(); // one user may have multiple teams therefore we need to have multiple queries
+                    //for example if there are two teams there will need to be two queries performed
 for($i=0;$i<$count;$i++){
-    echo "<h1 class='whiteText'>teams[$i] = ".$teams[$i]."</h1>";
+    
     $queries[$i] = "select 
                         team.leagueid, team.teamID,teamName, playerSet.leagueID, players.playerID,nflTeam,playerPosition, playerName,yards,TDs,turnovers 
                             from (players) 
@@ -40,11 +42,10 @@ for($i=0;$i<$count;$i++){
                                                 on team.teamID = playerSet.teamID
                                                     where team.teamID = $teams[$i]";
 }
-for($i=0;$i<$count;$i++){
-     echo "<h4 class='whiteText'>$queries[$i]</h4>";
-}
-$results = array();
-for($i=0;$i<$count;$i++){
+
+$results = array(); 
+
+for($i=0;$i<$count;$i++) { 
      $results[$i] = mysqli_query($db, $queries[$i]);
 }
 
@@ -52,8 +53,8 @@ for($i=0;$i<$count;$i++){
 //echo 'count = '.$count;
 
 for($i=0;$i<$count;$i++){
-    echo '<table id="playerSetTable"><tr>
-    <th colspan="7">Team Name: '.$teamNames[$i].'</th><th>League: '.$teamLeague[$i].'</th></tr><tr>
+    echo '<table id="playerSetTable"><tr>';
+    echo '<tr><th>League: '.$teamLeague[$i].'</th><th colspan="8">Team Name: '.$teamNames[$i].'</th></tr><tr>
     <th>ID</th>
     <th>League</th>
     <th>Name</th>
@@ -62,8 +63,11 @@ for($i=0;$i<$count;$i++){
     <th>yards</th>
     <th>TDs</th>
     <th>turnovers</th>
+    <th>Points</th>
     </tr>';
     while ($tableRow = mysqli_fetch_assoc($results[$i])) { // Loops 3 times if there are 3 returned rows... etc
+        $points = $tableRow['yards']/10 + $tableRow['TDs']*6 - $tableRow['turnovers']*4; 
+        $totalPoints += $points;
         echo "<tr>
         <td>".$tableRow['playerID']."</td>
         <td>".$tableRow['leagueid']."</td>
@@ -73,9 +77,16 @@ for($i=0;$i<$count;$i++){
         <td>".$tableRow['yards']."</td>
         <td>".$tableRow['TDs']."</td>
         <td>".$tableRow['turnovers']."</td>
+        <td>".$points."</td>
         </tr>";
+       
     }
-    echo '</table>';
+    echo "<tr>
+        <th colspan=8>Total Team Points :</th>
+        <th>".$totalPoints."
+    </tr>
+    </table><br>";
+    $totalPoints = 0;
 }
 
 ?>
